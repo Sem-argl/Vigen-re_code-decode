@@ -9,10 +9,10 @@ key_message = key * int(len(message)/(len(key))) + key[0:int(len(message) % len(
 def Vigenère_decoder(message, key):
   message_decoded = ""
   message_decoded_sp = ""
-  
+  j = 0
 # -------------- message_decoding
   for i in range(len(message_no_space)):
-   f ((message_no_space[i] == '!') or (message_no_space[i] == '.') or (message_no_space[i] == '?')):
+   if ((message_no_space[i] == '!') or (message_no_space[i] == '.') or (message_no_space[i] == '?')):
       message_decoded += message_no_space[i]
 # -------------- decoded string splits in to words
   for i in range(len(message)):
