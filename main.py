@@ -1,7 +1,7 @@
 import random
 import math 
 
-num_people_in_room = 23
+num_people_in_room = 40
 birthday_mach_list = {}
 birthday_list1 = {}
 month = ""
@@ -39,7 +39,7 @@ for month in birthday_list1:
     counter += 1
     print("Person {i} 's birthday is {month} {date}".format(i = counter, date = birthday_list1[month][day], month = month ))
 print("\n")
-print("In our simulation, there is ", t,   " people have the same birthdays. \non this dates:",birthday_mach_list)
+print("In this simulation, there is ", t,   " people have the same birthdays. \non this dates:",birthday_mach_list)
 # === clculate  chanse
 r= 0
 for i in range(2,num_people_in_room + 1):
