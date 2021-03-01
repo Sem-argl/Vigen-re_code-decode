@@ -1,28 +1,47 @@
-alphabet = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
-message = "dfc aruw fsti gr vjtwhr wznj? vmph otis! cbx swv jipreneo uhllj kpi rahjib eg fjdkwkedhmp!"
-key = "friends"
-message_splited = message.split(" ")
-message_stripped = message.replace('!', '').replace('?', '') # eliminate non leters characters from the message
-message_no_space = message_stripped.replace(' ', '')  # make all words in message be  en one long string with no " "
-key_message = key * int(len(message)/(len(key))) + key[0:int(len(message) % len(key))]
+import random
+import math 
 
-def Vigenère_decoder(message, key):
-  message_decoded = ""
-  message_decoded_sp = ""
-  j = 0
-# -------------- message_decoding
-  for i in range(len(message_no_space)):
-    if message_no_space[i] in alphabet:
-      message_decoded = message_decoded + alphabet[(alphabet.find(message_no_space[i]) - alphabet.find(key_message[i]))]
-    if ((message_no_space[i] == '!') or (message_no_space[i] == '.') or (message_no_space[i] == '?')):
-      message_decoded += message_no_space[i]
-# -------------- decoded string splits in to words
-  for i in range(len(message)):
-    if message[i] in alphabet:
-      j += 1           # set a separate counter for this part of for loop so it not missmach when i meets not leter character in message
-      message_decoded_sp += message_decoded[j - 1]
-    if (message[i] in alphabet) == False:
-      message_decoded_sp += message[i]
-           
-  return (message_decoded_sp)
-print(Vigenère_decoder(message, key))
+num_people_in_room = 40
+birthday_mach_list = {}
+birthday_list1 = {}
+month = ""
+counter = 0
+#===  Simulate situation
+months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+for i in range(1,num_people_in_room + 1):
+  month = random.choice(months)
+  if month == "February":
+     day = random.randint(1,28)
+  elif months == "January" or "March" or "May" or "July" or "August" or "October" or "December":
+    day = random.randint(1,31)
+  else:
+    day = random.randint(1,30)
+  if month in birthday_list1:
+    birthday_list1[month] += [day]
+  else:
+    birthday_list1[month] = [day]     # dictionary ith simulated birth days
+
+# === count number of people with same birth date
+
+for birth_month in birthday_list1:
+    for day in birthday_list1[birth_month]:
+      if birthday_list1[birth_month].count(day) > 1:
+          birthday_mach_list[birth_month] = [day,birthday_list1[birth_month].count(day)]
+    
+#print(birthday_mach_list)
+t = 0
+for i in birthday_mach_list:
+  t += birthday_mach_list[i][1]
+
+print("Here's what our room looks like:\n")
+for month in birthday_list1:
+  for day in range(len(birthday_list1[month])):
+    counter += 1
+    print("Person {i} 's birthday is {month} {date}".format(i = counter, date = birthday_list1[month][day], month = month ))
+print("\n")
+print("In this simulation, there is ", t,   " people have the same birthdays. \non this dates:",birthday_mach_list)
+# === clculate  chanse
+r= 0
+for i in range(2,num_people_in_room + 1):
+  r =round((1 - math.factorial(365)/((365**num_people_in_room)*math.factorial(365-num_people_in_room)))*100,2)
+print("The probability that two people in a room of {n} people have the same birthday is nearly {k}%".format(n = num_people_in_room, k = r))
