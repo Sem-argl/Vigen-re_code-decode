@@ -33,17 +33,17 @@ for j in range(1,len(q_final),2):
 for k in range(1,len(q_final),2):
     Age += [q_final[k][2]]
 # combine "City", "Education", "Age" in to dict == {City:[Education,age]}
-Dict = {}
-for i in range(len(City)):
-    if City[i] in Dict:
-        Dict[City[i]] += [[Education[i], Age[i]]]
+
+def eny_dict(key, vle1,value2):
+  Dict = {}
+  for i in range(len(key)):
+    if key[i] in Dict:
+        Dict[key[i]] += [[vle1[i], value2[i]]]
     else:
-        Dict[City[i]] = [[Education[i],Age[i]]]
+        Dict[key[i]] = [[vle1[i],value2[i]]]
+  return(Dict)
     
-print(Dict)
-city = False
-education = False
-age = False
+print(eny_dict(City, Education,Age))
 
 
                    
